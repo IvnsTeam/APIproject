@@ -42,7 +42,6 @@ services:
     networks:
       - api_project
     container_name: api_app
-    command: bash -c "cd /var/www/app && composer install"
 
 networks:
   api_project:

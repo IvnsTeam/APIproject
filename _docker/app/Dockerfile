@@ -25,7 +25,3 @@ RUN curl -sS https://getcomposer.org/installer | php -- \
 WORKDIR /var/www
 
 COPY . /var/www
-
-WORKDIR /var/www/app
-
-# RUN php artisan key:generate && php artisan migrate
