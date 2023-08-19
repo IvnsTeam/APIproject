@@ -1,6 +1,25 @@
 version: "3"
 
+volumes:
+  db:
+
 services:
+  db:
+    image: mysql:8.0
+    cap_add:
+      - SYS_NICE
+    restart: always
+    environment:
+      - MYSQL_DATABASE=test_db
+      - MYSQL_ROOT_PASSWORD=test_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - api_project
+
   nginx:
     image: nginx:latest
     volumes:
@@ -10,6 +29,8 @@ services:
       - "8876:80"
     depends_on:
       - app
+    networks:
+      - api_project
     container_name: api_nginx
 
   app:
@@ -18,4 +39,10 @@ services:
       dockerfile: _docker/app/Dockerfile
     volumes:
       - ./:/var/www
+      - ./:/var/www/app/vendor/
+    networks:
+      - api_project
     container_name: api_app
+
+networks:
+  api_project:
