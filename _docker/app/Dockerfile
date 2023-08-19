@@ -24,11 +24,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- \
 
 WORKDIR /var/www
 
-COPY ./app/ /var/www/app
+COPY . /var/www
 
 WORKDIR /var/www/app
-
-RUN composer install && composer clear-cache
-# RUN composer install --no-interaction --no-progress --no-suggest && composer clear-cache
 
 # RUN php artisan key:generate && php artisan migrate
