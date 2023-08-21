@@ -40,9 +40,35 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 
 Затем продолжить установку с 5 пункта.
 
+### Производительность контейнера
+
+Для большей производительности контейнер нужно запускать из под окружения linux.
+Для этого необходимо переместить проект в wsl.<br>
+Получить список wsl:
+
+```bash
+wsl --list --verbose
+```
+
+Изменить версию wsl на 2 (необходимо для подключение в Docker):
+
+```bash
+wsl --set-version <название wsl> 2
+```
+
+Установить wsl 2 по умолчанию:
+
+```bash
+wsl.exe --set-default-version 2
+```
+
+<b style="font-size:20px;">\*</b> В рамках данного проекта для разработки я использую WSL Ununtu-20.04
+
 ## Работа с БД
 
-Для удобства можно использовать MySQL Workbench Доступы к тестовой базе:
-host: 127.0.0.1:8101
-login: root
-password: test_password
+Для удобства можно использовать MySQL Workbench <br>
+<br>
+Доступы к тестовой базе:<br>
+host: `127.0.0.1:8101` <br>
+login: `root` <br>
+password: `test_password` <br>
