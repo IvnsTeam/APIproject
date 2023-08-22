@@ -40,12 +40,12 @@ wsl --set-version <название wsl> 2
 3. В Docker перейти в `настройки => Resources => wsl integration` и выбрать нужную Ubuntu.
 4. Развернуть проект в Ubuntu `/home/<пользователь ununtu>/projects/`
 5. Запустить docker-контейнер из под ubuntu `docker-compose up -d`
-6. Перейти в дирректорию `/app/` и выполнить установку зависимостей `composer install`
-7. Создать файл `.env` на основе `.env.example`
-8. Изменить доступ к файлам командой `sudo chmod 777 -R ./`
-9. Открыть консоль контейнера `docker exec -u 0 -it api_app /bin/bash`
-10. Сгенерируйте ключ приложения: `php artisan key:generate`
-11. Запустите миграции: `php artisan migrate`
+6. Создать файл `.env` на основе `.env.example`
+7. Открыть консоль контейнера `docker exec -u 0 -it api_app /bin/bash`
+8. Перейти в дирректорию `/app/` и выполнить установку зависимостей `composer install`
+9. Сгенерируйте ключ приложения: `php artisan key:generate`
+10. Запустите миграции: `php artisan migrate`
+11. Выйти из терминала контейнера `exit`, затем изменить доступ к файлам командой `sudo chmod 777 -R ./`
 
 Сервис будет доступен по URL [http://localhost:8876/](http://localhost:8876/)
 
