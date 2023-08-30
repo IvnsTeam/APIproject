@@ -8,20 +8,16 @@ class APIprojectService
 
     public function __construct()
     {
-        $apiKey = Config::get('apiproject.api_key');
-        $apiUrl = Config::get('apiproject.api_url');
+        $apiKey = Config::get('APIsetting.api_key');
+        $apiUrl = Config::get('APIsetting.api_url');
     }
 
-
-    public function doSomething()
+    public function GetApiSettings()
     {
-        return array(
-            "test1" => "test1-1",
-            "test2" => "test2-1",
-            "test3" => "test3-1",
+        $settings = array(
+            "token" => Config::get("APIsetting.api_key"),
+            "url" => Config::get("APIsetting.api_url"),
         );
+        return $settings;
     }
 }
-
-
-$API = new APIprojectService();

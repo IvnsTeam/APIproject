@@ -11,5 +11,8 @@ Route::get('/', function () {
 });
 
 // custom routes
-Route::get('/users/create', [UserController::class, 'CreateNewUser']);
-Route::get('/users/get', [UserController::class, 'GetUser']);
+
+Route::middleware(['api'])->group(function () {
+    Route::post('api/v1/users/create', [UserController::class, 'CreateNewUser']);
+    Route::post('api/v1/users/get', [UserController::class, 'GetUser']);
+});
