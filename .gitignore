@@ -20,7 +20,8 @@ auth.json
 *.log
 *.swp
 *.swo
-database/migrations/
 database/seeds/
-
+/database/factories/
 db
+
+app/config/APIsetting.php
