@@ -20,12 +20,11 @@ class UserController extends Controller
         $this->settings = $this->APIproject->GetApiSettings();
     }
 
-
     public function CreateNewUser(Request $request){
 
         try {
             $validatedData = $request->validate([
-                'user_type' => ['required', 'string', 'max:255', Rule::in(["user", "admin"])],
+                // 'user_type' => ['required', 'string', 'max:255', Rule::in(["user", "admin"])],
                 'name' => ['required', 'string', 'max:255'],
                 'surname' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'email', 'unique:users'],
@@ -37,7 +36,7 @@ class UserController extends Controller
         };
 
         $result = DB::table('users')->insert([
-            'user_type' => $validatedData["user_type"],
+            'user_type' => "user",
             'name' => $validatedData["name"],
             'surname' => $validatedData["surname"],
             'email' => $validatedData["email"],
@@ -48,10 +47,11 @@ class UserController extends Controller
             'organization_id' => isset($validatedData["organization_id"]) ? $validatedData["organization_id"] : null,
         ]);
         
-        print_r( json_encode(array(
-            "status" => $status = $result ? "success" : "error"),
-        ));
+        $response = array(
+            "status" => $status = $result ? "success" : "error",
+        );
 
+        print_r( json_encode( $response ));
     }
 
     public function GetUser(){

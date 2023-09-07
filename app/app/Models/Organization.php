@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Organization extends Model
 {
     use HasFactory;
-
-    public function organization(){
-        return $this->belongsTo(Organization::class, 'organization_id');
+    
+    public function users(){
+        return $this->hasMany(User::class, 'organization_id');
     }
+
+
 }
