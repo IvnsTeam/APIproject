@@ -56,6 +56,12 @@ class UserController extends Controller
 
     public function GetUser(){
         $response = User::all();
+
+        $response = $users = DB::table('users')
+            ->join('organizations', 'users.organization_id', '=', 'organizations.id')
+            ->select('users.*','organizations.name as organization_name')
+            ->get();
+
         print_r( json_encode($response) );
     }
 }
