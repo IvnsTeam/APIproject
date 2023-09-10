@@ -49,24 +49,23 @@ wsl --set-version <название wsl> 2
 
 Сервис будет доступен по URL [http://localhost:8876/](http://localhost:8876/)
 
-## Установка на open server
-
-1. Клонируйте репозиторий в проекты openserver
-2. Перейдите в директорию с окружением: `cd APIproject/app`
-3. Создайте файл `.env` на основе `.env.example` и настройте его параметры.
-4. Установите зависимости командами `composer upgrade`, `composer install`
-5. Запустите Docker контейнер `docker-compose up -d`
-6. Открыть консоль контейнера `docker exec -u 0 -it api_app /bin/bash`
-7. Сгенерируйте ключ приложения: `php artisan key:generate`
-8. Запустите миграции: `php artisan migrate`
-
-Сервис будет доступен по URL [http://localhost:8876/](http://localhost:8876/)
-
-## Работа с БД
-
+<b>Работа с БД</b>
 Для удобства можно использовать MySQL Workbench <br>
 <br>
-Доступы к тестовой базе:<br>
+Доступы к тестовой базе созданной с помощью docker:<br>
 host: `127.0.0.1:8101` <br>
 login: `root` <br>
 password: `test_password` <br>
+
+## Установка на open server
+
+1. Клонируйте репозиторий в проекты openserver
+2. Установить в настройках openserver домен, который будет вести в APIproject/app/app
+3. Создать базу данных
+4. Перейдите в директорию с окружением: `cd APIproject/app/public`
+5. Создайте файл `.env` на основе `.env.example` и настройте его параметры.
+6. Установите зависимости командами `composer upgrade`, `composer install`
+7. Сгенерируйте ключ приложения: `php artisan key:generate`
+8. Запустите миграции: `php artisan migrate`
+
+Сервис будет доступен по <b>установленному вами домену</b>
