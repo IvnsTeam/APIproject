@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 // Custom controllers
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrganizationsController;
+use App\Http\Controllers\TokenController;
 
 
 Route::get('/', function () {
@@ -19,4 +20,7 @@ Route::middleware(['api'])->group(function () {
     
     Route::post('api/v1/organizations/create', [OrganizationsController::class, 'CreateNewOrganization']);
     Route::post('api/v1/organizations/get', [OrganizationsController::class, 'GetMyOrganization']);
+
+
+    Route::post('api/v1/token/create', [TokenController::class, 'CreateNewApiToken']);
 });
