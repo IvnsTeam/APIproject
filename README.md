@@ -49,7 +49,7 @@ wsl --set-version <название wsl> 2
 
 Сервис будет доступен по URL [http://localhost:8876/](http://localhost:8876/)
 
-<b>Работа с БД</b>
+<b>Работа с БД</b><br>
 Для удобства можно использовать MySQL Workbench <br>
 <br>
 Доступы к тестовой базе созданной с помощью docker:<br>
