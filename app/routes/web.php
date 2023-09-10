@@ -17,5 +17,6 @@ Route::middleware(['api'])->group(function () {
     Route::post('api/v1/users/create', [UserController::class, 'CreateNewUser']);
     Route::post('api/v1/users/get', [UserController::class, 'GetUser']);
     
-    Route::post('api/v1/organizations/create', [OrganizationsController::class, 'CreateNewOrganizations']);
+    Route::post('api/v1/organizations/create', [OrganizationsController::class, 'CreateNewOrganization']);
+    Route::post('api/v1/organizations/get', [OrganizationsController::class, 'GetMyOrganization']);
 });
