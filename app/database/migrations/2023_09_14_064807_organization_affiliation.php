@@ -8,15 +8,15 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('organizations', function (Blueprint $table) {
+        Schema::create('organization_affiliation', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // Название организации
-            $table->longText('description'); // Описание организации
+            $table->string('user_id'); // ID-пользователя
+            $table->string('organization_id'); // ID-организации
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('organizations');
+        Schema::dropIfExists('organization_affiliation');
     }
 };

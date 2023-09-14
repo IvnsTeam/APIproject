@@ -44,14 +44,13 @@ class UserController extends Controller
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
             'remember_token' => Str::random(60),
-            'organization_id' => isset($validatedData["organization_id"]) ? $validatedData["organization_id"] : null,
         ]);
         
         $response = array(
             "status" => $status = $result ? "success" : "error",
         );
 
-        print_r( json_encode( $response ));
+        print_r( json_encode( $response ) );
     }
 
     public function GetUser(){

@@ -23,25 +23,41 @@ class OrganizationsController extends Controller
     public function CreateNewOrganization(Request $request){
         try {
             $validatedData = $request->validate([
+                'api_token' => ['required', 'string', 'max:255'],
                 'name' => ['required', 'string', 'max:255', 'unique:organizations'],
+                'description' => ['nullable', 'string'],
             ]);
         } catch (ValidationException $e) {
             return response()->json();
         };
 
-        $result = DB::table('organizations')->insertGetId([
-            'name' => $validatedData["name"],
-        ]);
-        
+
+        $UserData = $this->APIproject->getUserByToken( $validatedData["api_token"] );
+
+
+        /*
         $response = array(
             "status" => ($result !== null) ? "success" : "error",
             "organizations_id" => ($result !== null) ? $result : "",
         );
 
+        $response = array(
+            "status" => ($result !== null) ? "success" : "error",
+            "organizations_id" => ($result !== null) ? $result : "",
+        );
+
+        
+        $result = DB::table('organizations')->insertGetId([
+            'name' => $validatedData["name"],
+        ]);
+        
+
         print_r( json_encode($response));
+        */
     }
 
     public function GetMyOrganization(Request $request){
+        /*
         try {
             $validatedData = $request->validate([
                 'organizations_id' => ['required', 'string', 'max:255', 'exists:organizations,id'],
@@ -61,6 +77,7 @@ class OrganizationsController extends Controller
         );
 
         print_r( json_encode($response));
+        */
     }
    
 

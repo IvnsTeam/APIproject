@@ -15,7 +15,6 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique(); // email
             $table->timestamp('email_verified_at')->nullable(); // Подтвержден ли email
             $table->string('password'); // Пароль
-            $table->string('organization_id')->nullable();; // ID Организации
             $table->rememberToken(); // токен авторизации
             $table->timestamps(); 
         });

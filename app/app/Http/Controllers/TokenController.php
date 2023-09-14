@@ -33,8 +33,14 @@ class TokenController extends Controller
             return response()->json();
         };
 
+        $UserData = DB::table('users')
+            ->select('id')
+            ->where('email', '=', $validatedData["UserEmail"])
+            ->get();
+
+        
         $result = DB::table('api_tokens')->insertGetId([
-            'issued_user' => $validatedData["UserEmail"],
+            'issued_user' => $UserData[0]->id,
             'api_token' => $api_token = Str::random(64),
         ]);
         
