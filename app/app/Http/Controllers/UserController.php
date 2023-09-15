@@ -17,7 +17,11 @@ class UserController extends Controller
     public function __construct(APIprojectService $APIproject){
         $this->APIproject = $APIproject;
 
-        $this->settings = $this->APIproject->GetApiSettings();
+        $this->APIproject->apiKey = (isset($_POST["api_token"]) && trim($_POST["api_token"])!="" ) ? $_POST["api_token"] : false;
+
+        if( $this->APIproject->apiKey ){
+            $this->UserData = $this->APIproject->getUserByToken();
+        };
     }
 
     public function CreateNewUser(Request $request){

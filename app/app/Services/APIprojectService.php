@@ -9,26 +9,17 @@ use Illuminate\Support\Facades\DB;
 
 class APIprojectService
 {
+    public $apiKey;
 
     public function __construct()
     {
-        $apiKey = Config::get('APIsetting.api_key');
-        $apiUrl = Config::get('APIsetting.api_url');
+
     }
 
-    public function GetApiSettings()
-    {
-        $settings = array(
-            "token" => Config::get("APIsetting.api_key"),
-            "url" => Config::get("APIsetting.api_url"),
-        );
-        return $settings;
-    }
-
-    public function getUserByToken( string $token ){
+    public function getUserByToken(){
         $userid = DB::table('api_tokens')
             ->select('*')
-            ->where('api_token', '=', $token)
+            ->where('api_token', '=', $this->apiKey)
             ->get();
     
 
@@ -37,6 +28,6 @@ class APIprojectService
             ->where('id', '=', $userid[0]->accepted_user)
             ->get();
 
-        return $response;
+        return $response[0];
     }
 }

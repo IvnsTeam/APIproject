@@ -16,8 +16,11 @@ class OrganizationsController extends Controller
     protected $APIproject;
     public function __construct(APIprojectService $APIproject){
         $this->APIproject = $APIproject;
+        $this->APIproject->apiKey = (isset($_POST["api_token"]) && trim($_POST["api_token"])!="" ) ? $_POST["api_token"] : false;
 
-        $this->settings = $this->APIproject->GetApiSettings();
+        if( $this->APIproject->apiKey ){
+            $this->UserData = $this->APIproject->getUserByToken();
+        };
     }
 
     public function CreateNewOrganization(Request $request){
@@ -31,53 +34,39 @@ class OrganizationsController extends Controller
             return response()->json();
         };
 
-
-        $UserData = $this->APIproject->getUserByToken( $validatedData["api_token"] );
-
-
-        /*
-        $response = array(
-            "status" => ($result !== null) ? "success" : "error",
-            "organizations_id" => ($result !== null) ? $result : "",
-        );
-
-        $response = array(
-            "status" => ($result !== null) ? "success" : "error",
-            "organizations_id" => ($result !== null) ? $result : "",
-        );
-
-        
-        $result = DB::table('organizations')->insertGetId([
+        // create organization
+        $organizationId = DB::table('organizations')->insertGetId([
             'name' => $validatedData["name"],
+            'description' => ($validatedData["description"]) ? $validatedData["description"] : "",
         ]);
-        
+        // add current user to organization
+        $response = DB::table('organization_affiliation')->insertGetId([
+            'user_id' => $this->UserData->id,
+            'organization_id' => $organizationId,
+        ]);
 
-        print_r( json_encode($response));
-        */
+        print_r( json_encode($response) );
     }
 
     public function GetMyOrganization(Request $request){
-        /*
         try {
             $validatedData = $request->validate([
-                'organizations_id' => ['required', 'string', 'max:255', 'exists:organizations,id'],
+                'api_token' => ['required', 'string', 'max:255'],
             ]);
         } catch (ValidationException $e) {
             return response()->json();
         };
 
-        $result = DB::table('organizations')
-            ->select("*")
-            ->where('id', $validatedData['organizations_id'])
+        $organizationIds = DB::table('organization_affiliation')
+            ->where('user_id', '=', $this->UserData->id)
+            ->pluck('organization_id')
+            ->toArray();
+    
+        $response = DB::table('organizations')
+            ->whereIn('id', $organizationIds)
             ->get();
         
-        $response = array(
-            "status" => ($result) ? "success" : "error",
-            "organization" => ($result && count($result)!=0 ) ? $result : "",
-        );
-
-        print_r( json_encode($response));
-        */
+        print_r( json_encode($response) );
     }
    
 
